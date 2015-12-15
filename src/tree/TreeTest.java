@@ -73,14 +73,20 @@ public class TreeTest {
 	}
 	
 	//Print tree structure
-	public void printTree(int Noofnode)
+	public void printTree(Node node)
 	{
-		int weigh=Noofnode;
-		System.out.println("Root"+Node.root);
-		while(weigh>0)
+		if(node.lchild==null || node.rchild==null )
 		{
-			
+			return ;
 		}
+		//count++;
+		//System.out.println("Left child of "+node.data+" is"+node.lchild.data);
+		System.out.println(node.data+" --Lchild--> "+node.lchild.data);
+		printTree(node.lchild);
+		System.out.println(node.data+" --Rchild--> "+node.rchild.data);
+		//System.out.println("Right child of "+node.data+" is"+node.rchild.data);
+		printTree(node.rchild);
+	
 	}
 	
 	//weigh --> find the number of node in the tree
@@ -102,7 +108,7 @@ public class TreeTest {
 		Node iterator=Node.root;
 		while(iterator!=null || iterator!=null)
 		{
-			System.out.println("serach node"+iterator.data);
+		//	System.out.println("serach node"+iterator.data);
 			if(value==iterator.data)
 			{
 				loc=iterator;
@@ -136,6 +142,31 @@ public class TreeTest {
 	//print post and prefix 
 	
 	
+	// delete node from tree
+	public void deleteNode(int value)
+	{
+		Node node=new TreeTest().searchNode(13);
+		System.out.println("node value"+node.data); 
+		
+		if(node.lchild==null && node.rchild==null)
+		{
+			node.parent=null;
+		}
+		else if(node.lchild==null || node.rchild==null)
+		{
+			if(node.lchild==null)
+			{
+				node.parent=node.rchild;
+			}
+			else
+			{
+				node.parent=node.rchild;
+			}
+		}
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TreeTest TT=new TreeTest();
@@ -145,13 +176,14 @@ public class TreeTest {
 		TT.createTree(12);
 		TT.createTree(12);
 		TT.createTree(13);
-	//	TT.createTree(24);
+		TT.createTree(24);
 		TT.createTree(89);
 		//TT.createTree(13);
 		Node node=TT.searchNode(13);
 		System.out.println("node value"+node.data);
 		TT.weigh(Node.root);
 		System.out.println(" Node Count : "+count);
+		TT.printTree(Node.root);
 	}
 
 }
