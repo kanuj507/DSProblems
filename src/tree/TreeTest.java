@@ -11,11 +11,13 @@ class Node
 public class TreeTest {
 	
 	int iteartor=0;
+	static String flag=null;
 	static int count=0;
 
 	public static Node createNode(int data)
 	{
 		Node node=new Node();
+		
 		node.data=data;
 		node.lchild=null;
 		node.rchild=null;
@@ -75,18 +77,23 @@ public class TreeTest {
 	//Print tree structure
 	public void printTree(Node node)
 	{
-		if(node.lchild==null || node.rchild==null )
+		if(node.lchild==null && node.rchild==null )
 		{
 			return ;
 		}
 		//count++;
 		//System.out.println("Left child of "+node.data+" is"+node.lchild.data);
-		System.out.println(node.data+" --Lchild--> "+node.lchild.data);
-		printTree(node.lchild);
-		System.out.println(node.data+" --Rchild--> "+node.rchild.data);
+		if(node.lchild!=null)
+		{
+			System.out.println(node.data+" --Lchild--> "+node.lchild.data);
+			printTree(node.lchild);
+		}
+		if(node.rchild!=null)
+		{
+			System.out.println(node.data+" --Rchild--> "+node.rchild.data);
 		//System.out.println("Right child of "+node.data+" is"+node.rchild.data);
 		printTree(node.rchild);
-	
+		}
 	}
 	
 	//weigh --> find the number of node in the tree
@@ -103,7 +110,7 @@ public class TreeTest {
 	//find node -  search node in the tree structure
 	public Node searchNode(int value)
 	{
-		String flag=null;
+		
 		Node loc = null;
 		Node iterator=Node.root;
 		while(iterator!=null || iterator!=null)
@@ -145,28 +152,52 @@ public class TreeTest {
 	// delete node from tree
 	public void deleteNode(int value)
 	{
-		Node node=new TreeTest().searchNode(13);
+		Node node=new TreeTest().searchNode(value);
 		System.out.println("node value"+node.data); 
-		
-		if(node.lchild==null && node.rchild==null)
+		if (node.lchild!=null && node.rchild!=null)
 		{
-			node.parent=null;
+			Node sucessor=findSucessorNode(value,node);
+			sucessor.parent=sucessor.rchild;
+			System.out.println("Successfully deleted"+node.data);
+			node.data=sucessor.data;
+			
+		}
+		else if(node.lchild==null && node.rchild==null)
+		{
+			if(flag.equalsIgnoreCase("left"))
+				{node.parent.lchild=null;}
+			else
+				{node.parent.rchild=null;}
+			System.out.println("Successfully deleted"+node.data);
 		}
 		else if(node.lchild==null || node.rchild==null)
 		{
 			if(node.lchild==null)
 			{
 				node.parent=node.rchild;
+				System.out.println("Successfully deleted"+node.data);
 			}
-			else
+			if (node.rchild==null)
 			{
-				node.parent=node.rchild;
+				node.parent=node.lchild;
+				System.out.println("Successfully deleted"+node.data);
 			}
 		}
 		
 		
+		
 	}
 	
+	public  Node findSucessorNode(int value,Node node) {
+		// TODO Auto-generated method stub
+		
+		while(node.lchild!=null)
+		{
+			node=node.lchild;
+		}
+		
+		return node;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TreeTest TT=new TreeTest();
@@ -174,15 +205,22 @@ public class TreeTest {
 		TT.createTree(6);
 		TT.createTree(90);
 		TT.createTree(12);
-		TT.createTree(12);
-		TT.createTree(13);
-		TT.createTree(24);
+		TT.createTree(10);
+		TT.createTree(18);
+		TT.createTree(28);
 		TT.createTree(89);
-		//TT.createTree(13);
+		TT.createTree(13);
+		TT.createTree(25);
+		TT.createTree(105);
+		TT.createTree(3);
+		TT.createTree(5);
+		TT.createTree(100);
 		Node node=TT.searchNode(13);
 		System.out.println("node value"+node.data);
 		TT.weigh(Node.root);
 		System.out.println(" Node Count : "+count);
+		TT.printTree(Node.root);
+		TT.deleteNode(12);
 		TT.printTree(Node.root);
 	}
 
