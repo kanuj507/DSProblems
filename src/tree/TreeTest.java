@@ -9,10 +9,10 @@ class Node
 }
 
 public class TreeTest {
-	
 	int iteartor=0;
 	static String flag=null;
 	static int count=0;
+	static int place =0;
 
 	public static Node createNode(int data)
 	{
@@ -194,6 +194,44 @@ public class TreeTest {
 		
 	}
 	
+	
+	public void drawUsingTraversal(char[] travs1,char[] travs2,String travstype)
+	{
+		
+		String[] travs=travstype.split(",");
+		
+		if(travs[1]=="PreOrder" && travs[2]=="InOrder")
+		{
+			//while(travs)
+			char[] preorder=travs1;
+			Node.root.data=preorder[1];
+			while(travs1.length>0)
+			{
+				searchnode(travs2);
+			}
+		}
+		else if(travs[1]=="PostOrder" && travs[2]=="InOrder")
+		{
+			
+		}
+		else if(travs[1]=="PreOrder" && travs[2]=="PostOrder")
+		{
+			
+		}
+	}
+	
+	
+	
+	public void searchnode(char[] travs2)
+	{
+		while(travs2.length>0)
+		{
+
+			if(tras)
+				
+				char[] left=travs2[TreeTest.place];
+		}
+	}
 	public  Node findSucessorNode(int value,Node node) {
 		// TODO Auto-generated method stub
 		
