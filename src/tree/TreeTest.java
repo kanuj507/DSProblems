@@ -227,9 +227,9 @@ public class TreeTest {
 		while(travs2.length>0)
 		{
 
-			if(tras)
+		/*	if(tras)
 				
-				char[] left=travs2[TreeTest.place];
+				char[] left=travs2[TreeTest.place];*/
 		}
 	}
 	public  Node findSucessorNode(int value,Node node) {
