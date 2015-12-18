@@ -63,8 +63,35 @@ public class LinkListTest {
 	
 	public void deleteNode(int value)
 	{
+		Node searchpos=new LinkListTest().search(value);
+		
+		searchpos.next.prev=searchpos.prev;
+		searchpos.prev.next=searchpos.next;
+		
+		System.out.println("Item"+value+"");
 		
 	}
+	
+	
+	public Node search(int value)
+	{
+		int pos =0; 
+		
+		Node node =Node.root;
+		while(node.next!=null)
+		{
+			node=node.next;
+			if(node.data==value)
+			{
+				System.out.println(value+" is found at"+pos);
+				break;
+			}
+		}
+		return node;
+	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
