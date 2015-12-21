@@ -1,31 +1,61 @@
-<project>
-
-    <target name="clean">
-        <delete dir="build"/>
-    </target>
-	<target name="compile">
-		        <mkdir dir="build/classes"/>
-		        <javac srcdir="src" destdir="build/classes"/>
-		    </target>
-    
-
-    <target name="jar">
-      <mkdir dir="build/classes"/>
-        <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/SampleTest.jar" basedir="build/classes">
-            <manifest>
-                <attribute name="SampleTest" value="testng.SampleTest"/>
-            </manifest>
-        </jar>
-    </target>
+<project default="run">
 	
+	<target name="clean">
+	        <delete dir="build"/>
+	    </target>
+	
+	
+<target name="compile" depends="clean">
+	<mkdir dir="build/classes"/>
+<javac srcdir="src" includeantruntime="false" destdir="build/classes" />	
+</target>
+	
+	<target name="jar" depends="compile">
+	      <mkdir dir="build/classes"/>
+	        <mkdir dir="build/jar"/>
+	        <jar destfile="build/jar/TreeTest.jar" basedir="build/classes">
+	            <manifest>
+	                <attribute name="TreeTest" value="tree.TreeTest"/>
+	            </manifest>
+	        </jar>
+	    </target>
+		
+<target name="run" depends="jar">
 
-    <target name="run">
-        <java jar="build/jar/SampleTest.jar" fork="true"/>
-    </target>
+
+	<java  classname="SampleTest">
+	  <classpath path="build/classes"/>
+		</java>
+		
+	
+</target>
+	
+	  	    
+	 <target name="xslt" depends="run">
+	                 
+	     <xslt in="${basedir}/testng_output/testng-results.xml" style="${basedir}/testng-results.xsl" out="${basedir}/testng-xslt/index.html" processor="SaxonLiaison">
+	                        
+	            <param expression="${basedir}/testng-xslt/" name="testNgXslt.outputDir" />
+
+	            <param expression="true" name="testNgXslt.sortTestCaseLinks" />
+
+	            <param expression="FAIL,SKIP,PASS,CONF,BY_CLASS" name="testNgXslt.testDetailsFilter" />
+
+	            <param expression="true" name="testNgXslt.showRuntimeTotals" />
+
+	            <classpath refid="master-classpath">
+	            </classpath>
+	        </xslt>
+	    </target>
+	 
+	<property name="LIB" value="${basedir}/lib" />
+	<property name="BIN" value="${basedir}/bin" />
+	<path id="master-classpath">
+	<pathelement location="${BIN}" />
+	      <fileset dir="${LIB}">
+	         <include name="**/*.jar" />
+	      </fileset>
+	</path>
+
 
 </project>
-
-
-
-
