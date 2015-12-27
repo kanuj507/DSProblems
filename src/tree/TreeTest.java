@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.Scanner;
+
 class Node 
 {
 	Node node;
@@ -245,6 +247,38 @@ public class TreeTest {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.println("started");
+		long r= -100000000000000l ; 
+		int b=(int)r;
+		long c	=-(long) Math.pow(2, 62);
+		if(r>=-(int) Math.pow(2, 63))
+		{
+			System.out.println("hi");
+		}
+		Scanner sc=new Scanner(System.in);
+        int x=sc.nextInt();
+        //Complete this code
+        double y=sc.nextDouble();
+      int i=sc.nextInt();
+      String s = String.valueOf(i);
+          System.out.println("String: "+s);
+        System.out.println("Double: "+y);
+        System.out.println("Int: "+x);
+        
+		/*Scanner sc=new Scanner(System.in);
+        int x=sc.nextInt();
+        String strI = String.valueOf(x);
+    //    String s= Integer.parseInt(x);
+        //Complete this code
+        double y=sc.nextDouble();
+        //sc.close();
+        sc.reset();
+        sc=new Scanner(System.in);
+        String s=sc.nextLine();*/
+       
+        System.out.println("Double: "+y);
+        System.out.println("Int: "+x);
+		
 		TreeTest TT=new TreeTest();
 		TT.createTree(23);
 		TT.createTree(6);
